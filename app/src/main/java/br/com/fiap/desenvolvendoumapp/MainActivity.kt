@@ -8,11 +8,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -30,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -51,7 +57,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             DesenvolvendoUmAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LoginScreen(modifier = Modifier.padding(innerPadding))
+                    CategoryScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -59,7 +65,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun CategoryScreen(modifier: Modifier = Modifier) {
     var text by remember { mutableStateOf("") }
 
     Column(
@@ -67,46 +73,91 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .padding(32.dp)
     ) {
-        TextField(
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Button(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0x0015BA35),
+                    contentColor = Color(0xFF1F779E)
+                ),
+                modifier = Modifier
+                    .width(60.dp)
+                    .absoluteOffset(x = -20.dp)
+                ) {
+                Icon(painter = painterResource(id = R.drawable.arrowback) , contentDescription = "voltar")
+            }
+            Text(
+                text = "Futsal",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start,
+                fontFamily = Roboto,
+                color = Color(0xFF1F779E)
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        OutlinedTextField(
             value = text,
             onValueChange = { letter -> text = letter },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().shadow(elevation = 20.dp),
             placeholder = { Text(text = "Busque por eventos") },
             trailingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.magnifying_glass),
                     contentDescription = "Icone de lupa"
                 )
-            }
+            },
+            shape = RoundedCornerShape(percent = 50)
         )
-        Text(text = "Futsal")
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Eventos disponíveis",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Start,
+            fontFamily = Roboto,
+            color = Color(0xFF1F779E)
+        )
+        Spacer(modifier = Modifier.height(15.dp))
         Button(
             onClick = { /*TODO*/ },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF15BA35)),
         ) {
-            Column(
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Top,
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp, vertical = 6.dp)
-            ) {
-                Text(
-                    text = "Futsal na quadra",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    fontFamily = Roboto,
-                    color = Color.White
-                )
-                Text(
-                    text = "Quarta - 17/08 as 09:30",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    fontFamily = Roboto,
-                    color = Color.White
+            ){
+
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Top,
+                ) {
+                    Text(
+                        text = "Futsal na quadra",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start,
+                        fontFamily = Roboto,
+                        color = Color.White
+                    )
+                    Text(
+                        text = "Quarta - 17/08 as 09:30",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start,
+                        fontFamily = Roboto,
+                        color = Color.White
+                    )
+                }
+
+                Image(
+                    painter = painterResource(id = R.drawable.soccer),
+                    contentDescription = "Futsal",
                 )
             }
         }
@@ -186,10 +237,10 @@ fun LoginScreen(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun LoginScreenPreview() {
     DesenvolvendoUmAppTheme {
-        LoginScreen()
+        CategoryScreen()
     }
 }
