@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.fiap.desenvolvendoumapp.screens.LoginScreen
 import br.com.fiap.desenvolvendoumapp.ui.theme.DesenvolvendoUmAppTheme
 import br.com.fiap.desenvolvendoumapp.ui.theme.Roboto
 
@@ -113,83 +114,4 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
-    var textEmail by remember { mutableStateOf("") }
-    var textSenha by remember { mutableStateOf("") }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Logo",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Campo de email
-        OutlinedTextField(
-            value = textEmail,
-            onValueChange = { textEmail = it },
-            label = { Text("Email") },
-            placeholder = { Text("Digite seu E-mail") },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            modifier = Modifier.fillMaxWidth(),
-            trailingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.check),
-                    contentDescription = "Verificado"
-                )
-            },
-            textStyle = TextStyle(color = Color(0xFF1F779E), fontSize = 16.sp)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Campo de senha
-        OutlinedTextField(
-            value = textSenha,
-            onValueChange = { textSenha = it },
-            label = { Text("Senha") },
-            placeholder = { Text("Senha") },
-            singleLine = true,
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            modifier = Modifier.fillMaxWidth(),
-            trailingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.eyecrossed),
-                    contentDescription = "Olho riscado"
-                )
-            },
-            textStyle = TextStyle(color = Color(0xFF1F779E), fontSize = 16.sp)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = {},
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1F779E))
-        ) {
-            Text(text = "Entrar")
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    DesenvolvendoUmAppTheme {
-        LoginScreen()
-    }
-}
