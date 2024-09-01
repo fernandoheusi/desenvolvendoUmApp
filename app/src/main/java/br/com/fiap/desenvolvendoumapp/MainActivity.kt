@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -37,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -57,7 +62,169 @@ class MainActivity : ComponentActivity() {
         setContent {
             DesenvolvendoUmAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CategoryScreen(modifier = Modifier.padding(innerPadding))
+                    HomeScreen(modifier = Modifier.padding(innerPadding))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun HomeScreen(modifier: Modifier = Modifier) {
+    var text by remember { mutableStateOf("") }
+    data class Category(
+        val id: Int,
+        val name: String,
+        val color: Color,
+        val picture: Int,
+    )
+    var categoryList = listOf(
+        Category(
+            id=0,
+            name="Futsal",
+            color=Color(0xFF091F07),
+            picture = R.drawable.futsal,
+        ),
+        Category(
+            id=1,
+            name="Corrida",
+            color=Color(0xFFA32822),
+            picture = R.drawable.corrida,
+        ),
+        Category(
+            id=2,
+            name="Yoga",
+            color=Color(0xFFFF95D5),
+            picture = R.drawable.yoga,
+        ),
+        Category(
+            id=3,
+            name="Fit Dance",
+            color=Color(0xFFFF7CAF),
+            picture = R.drawable.fit,
+        ),
+        Category(
+            id=4,
+            name="Natação",
+            color=Color(0xFF45757C),
+            picture = R.drawable.natacao,
+        ),
+        Category(
+            id=5,
+            name="Volei",
+            color=Color(0xFFFFD542),
+            picture = R.drawable.volei,
+        ),
+        Category(
+            id=6,
+            name="Basketball",
+            color=Color(0xFFC36725),
+            picture = R.drawable.basket,
+        ),
+        Category(
+            id=7,
+            name="Ginástica",
+            color=Color(0xFF1F1F1F),
+            picture = R.drawable.ginastica,
+        ),
+        Category(
+            id=8,
+            name="Artes Marciais",
+            color=Color(0xFF770505),
+            picture = R.drawable.marciais,
+        ),
+        Category(
+            id=9,
+            name="Hip Hop",
+            color=Color(0xFF767676),
+            picture = R.drawable.hiphop,
+        ),
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(32.dp)
+    ) {
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+        ){
+
+            Text(
+                text = "Olá, Cecília!",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start,
+                fontFamily = Roboto,
+                color = Color(0xFF1F779E)
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        OutlinedTextField(
+            value = text,
+            onValueChange = { letter -> text = letter },
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = { Text(text = "Busque por eventos") },
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.magnifying_glass),
+                    contentDescription = "Icone de lupa"
+                )
+            },
+            shape = RoundedCornerShape(percent = 50)
+        )
+        Spacer(modifier = Modifier.height(15.dp))
+        Text(
+            text = "Categorias",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Start,
+            fontFamily = Roboto,
+            color = Color(0xFF1F779E)
+        )
+        Spacer(modifier = Modifier.height(15.dp))
+
+
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(minSize = 128.dp),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+
+            items(categoryList){ category ->
+                Button(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier
+                        .width(165.dp)
+                        .height(100.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = category.color),
+                    shape = RoundedCornerShape(percent = 10)
+                ) {
+
+
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Top,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxSize(),
+                    ){
+                        Text(
+                            text = category.name,
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Start,
+                            fontFamily = Roboto,
+                            color = Color.White,
+                            modifier = Modifier.width(80.dp)
+                        )
+
+                        Image(
+                            painter = painterResource(id = category.picture),
+                            contentDescription = category.name,
+                            modifier = Modifier.fillMaxSize(),
+                        )
+                    }
                 }
             }
         }
@@ -101,7 +268,7 @@ fun CategoryScreen(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = text,
             onValueChange = { letter -> text = letter },
-            modifier = Modifier.fillMaxWidth().shadow(elevation = 20.dp),
+            modifier = Modifier.fillMaxWidth(),
             placeholder = { Text(text = "Busque por eventos") },
             trailingIcon = {
                 Icon(
@@ -241,6 +408,6 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 @Composable
 fun LoginScreenPreview() {
     DesenvolvendoUmAppTheme {
-        CategoryScreen()
+        HomeScreen()
     }
 }
