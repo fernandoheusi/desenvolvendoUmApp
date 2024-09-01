@@ -49,11 +49,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.fiap.desenvolvendoumapp.ui.theme.DesenvolvendoUmAppTheme
 import br.com.fiap.desenvolvendoumapp.ui.theme.Roboto
+import coil.compose.AsyncImage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,68 +78,68 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         val id: Int,
         val name: String,
         val color: Color,
-        val picture: Int,
+        val pictureURL: String,
     )
     var categoryList = listOf(
         Category(
             id=0,
             name="Futsal",
             color=Color(0xFF091F07),
-            picture = R.drawable.futsal,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/futsal.png",
         ),
         Category(
             id=1,
             name="Corrida",
             color=Color(0xFFA32822),
-            picture = R.drawable.corrida,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/corrida.png",
         ),
         Category(
             id=2,
             name="Yoga",
             color=Color(0xFFFF95D5),
-            picture = R.drawable.yoga,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/yoga.png",
         ),
         Category(
             id=3,
             name="Fit Dance",
             color=Color(0xFFFF7CAF),
-            picture = R.drawable.fit,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/fit.png",
         ),
         Category(
             id=4,
             name="Natação",
             color=Color(0xFF45757C),
-            picture = R.drawable.natacao,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/natacao.png",
         ),
         Category(
             id=5,
             name="Volei",
             color=Color(0xFFFFD542),
-            picture = R.drawable.volei,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/volei.png",
         ),
         Category(
             id=6,
             name="Basketball",
             color=Color(0xFFC36725),
-            picture = R.drawable.basket,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/basket.png",
         ),
         Category(
             id=7,
             name="Ginástica",
             color=Color(0xFF1F1F1F),
-            picture = R.drawable.ginastica,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/ginastica.png",
         ),
         Category(
             id=8,
             name="Artes Marciais",
             color=Color(0xFF770505),
-            picture = R.drawable.marciais,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/marciais.png",
         ),
         Category(
             id=9,
             name="Hip Hop",
             color=Color(0xFF767676),
-            picture = R.drawable.hiphop,
+            pictureURL = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/hiphop.png",
         ),
     )
 
@@ -216,13 +218,15 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                             textAlign = TextAlign.Start,
                             fontFamily = Roboto,
                             color = Color.White,
-                            modifier = Modifier.width(80.dp)
+                            modifier = Modifier.width(65.dp),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
 
-                        Image(
-                            painter = painterResource(id = category.picture),
+                        AsyncImage(
+                            model = category.pictureURL,
                             contentDescription = category.name,
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier.fillMaxHeight().fillMaxWidth()
                         )
                     }
                 }
