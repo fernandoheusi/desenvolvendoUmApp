@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.fiap.desenvolvendoumapp.screens.HomeScreen
 import br.com.fiap.desenvolvendoumapp.ui.theme.DesenvolvendoUmAppTheme
+import br.com.fiap.desenvolvendoumapp.screens.CalendarioScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             DesenvolvendoUmAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(modifier = Modifier.padding(innerPadding))
+                    CalendarioScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
