@@ -32,11 +32,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.desenvolvendoumapp.R
 import br.com.fiap.desenvolvendoumapp.ui.theme.DesenvolvendoUmAppTheme
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
     var textEmail by remember { mutableStateOf("") }
     var textSenha by remember { mutableStateOf("") }
 
@@ -99,7 +100,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = {},
+            onClick = { navController.navigate("home")},
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1F779E))
         ) {
@@ -148,10 +149,10 @@ fun LoginScreen(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    DesenvolvendoUmAppTheme {
-        LoginScreen()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun LoginScreenPreview() {
+//    DesenvolvendoUmAppTheme {
+//        LoginScreen()
+//    }
+//}
