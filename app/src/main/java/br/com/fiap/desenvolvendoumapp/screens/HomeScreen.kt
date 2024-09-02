@@ -1,5 +1,6 @@
 package br.com.fiap.desenvolvendoumapp.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -25,30 +26,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.fiap.desenvolvendoumapp.R
+import br.com.fiap.desenvolvendoumapp.model.Category
+import br.com.fiap.desenvolvendoumapp.service.RetrofitFactory
 import br.com.fiap.desenvolvendoumapp.ui.theme.Roboto
 import coil.compose.AsyncImage
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.math.log
 
-data class Category(
-    val id: Int,
-    val name: String,
-    val color: Color,
-    val pictureURL: String,
-)
-
-val categoryList = listOf(
-    createCategory(0, "Futsal", Color(0xFF091F07), "futsal.png"),
-    createCategory(1, "Corrida", Color(0xFFA32822), "corrida.png"),
-    createCategory(2, "Yoga", Color(0xFFFF95D5), "yoga.png"),
-    createCategory(3, "Fit Dance", Color(0xFFFF7CAF), "fit.png"),
-    createCategory(4, "Natação", Color(0xFF45757C), "natacao.png"),
-    createCategory(5, "Volei", Color(0xFFFFD542), "volei.png"),
-    createCategory(6, "Basketball", Color(0xFFC36725), "basket.png"),
-    createCategory(7, "Ginástica", Color(0xFF1F1F1F), "ginastica.png"),
-    createCategory(8, "Artes Marciais", Color(0xFF770505), "marciais.png"),
-    createCategory(9, "Hip Hop", Color(0xFF767676), "hiphop.png"),
-)
-
-fun createCategory(id: Int, name: String, color: Color, imageName: String): Category {
+fun createCategory(id: Int, name: String, color: String, imageName: String): Category {
     val baseUrl = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/"
     return Category(
         id = id,
@@ -60,7 +47,23 @@ fun createCategory(id: Int, name: String, color: Color, imageName: String): Cate
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+
+
+    var categoryList by remember {
+        mutableStateOf(listOf<Category>())
+    }
+
     var searchText by remember { mutableStateOf("") }
+    var callCategories = RetrofitFactory().getCategoriesService().getCategories()
+    callCategories.enqueue(object : Callback<List<Category>>{
+        override fun onResponse(call: Call<List<Category>>, response: Response<List<Category>>) {
+            categoryList = response.body()!!
+        }
+
+        override fun onFailure(call: Call<List<Category>>, t: Throwable) {
+            Log.i("Fiap","on failure: ${t.message}")
+        }
+    })
 
     Column(
         modifier = Modifier
@@ -137,7 +140,7 @@ fun CategoryButton(category: Category) {
         modifier = Modifier
             .width(165.dp)
             .height(100.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = category.color),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(category.color.toLong(radix = 16))),
         shape = RoundedCornerShape(percent = 10)
     ) {
         Row(

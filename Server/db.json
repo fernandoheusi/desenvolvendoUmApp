@@ -19,5 +19,67 @@
       "id": "3",
       "name": "Kaique"
     }
+  ],
+  "categories":[
+    {
+      "id":"0",
+      "name":"Futsal",
+      "color":"FF091F07",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/futsal.png"
+    },
+    {
+      "id":"1",
+      "name":"Corrida",
+      "color":"FFA32822",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/corrida.png"
+    },
+    {
+      "id":"2",
+      "name":"Yoga",
+      "color":"FFFF95D5",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/yoga.png"
+    },
+    {
+      "id":"3",
+      "name":"Fit Dance",
+      "color":"FFFF7CAF",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/fit.png"
+    },
+    {
+      "id":"4",
+      "name":"Natação",
+      "color":"FF45757C",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/natacao.png"
+    },
+    {
+      "id":"5",
+      "name":"Volei",
+      "color":"FFFFD542",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/volei.png"
+    },
+    {
+      "id":"6",
+      "name":"Basketball",
+      "color":"FFC36725",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/basket.png"
+    },
+    {
+      "id":"7",
+      "name":"Ginástica",
+      "color":"FF1F1F1F",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/ginastica.png"
+    },
+    {
+      "id":"8",
+      "name":"Artes Marciais",
+      "color":"FF770505",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/marciais.png"
+    },
+    {
+      "id":"9",
+      "name":"Hip Hop",
+      "color":"FF767676",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/hiphop.png"
+    }
   ]
 }
