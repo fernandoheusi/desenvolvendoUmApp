@@ -9,8 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.desenvolvendoumapp.screens.HomeScreen
+import br.com.fiap.desenvolvendoumapp.screens.LoginScreen
 import br.com.fiap.desenvolvendoumapp.ui.theme.DesenvolvendoUmAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,18 +23,38 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DesenvolvendoUmAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(modifier = Modifier.padding(innerPadding))
-                }
+                MeuApp()
             }
         }
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
+
+// nova "function main" do app
 @Composable
-fun LoginScreenPreview() {
-    DesenvolvendoUmAppTheme {
-        HomeScreen()
+fun MeuApp() {
+    val navController = rememberNavController()
+    Scaffold(
+        modifier = Modifier.fillMaxSize()
+    ) { innerPadding ->
+        NavigationComponent(navController, Modifier.padding(innerPadding))
+    }
+}
+
+/* funcao de navegacao
+* startDestination = login --> onde vai começar o app
+* lista de composable (tela)
+* */
+@Composable
+fun NavigationComponent(navController: NavHostController, modifier: Modifier = Modifier) {
+    NavHost(navController = navController, startDestination = "login", modifier = modifier) {
+        composable("login") {
+            LoginScreen(
+                onLoginClick = { navController.navigate("home") },
+            )
+        }
+        composable("home") {
+            HomeScreen()
+        }
     }
 }
