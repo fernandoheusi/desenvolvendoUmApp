@@ -35,16 +35,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.log
 
-fun createCategory(id: Int, name: String, color: String, imageName: String): Category {
-    val baseUrl = "https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/"
-    return Category(
-        id = id,
-        name = name,
-        color = color,
-        pictureURL = "$baseUrl$imageName"
-    )
-}
-
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
 
