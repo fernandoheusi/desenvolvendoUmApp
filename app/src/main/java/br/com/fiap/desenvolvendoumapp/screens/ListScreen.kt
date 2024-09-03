@@ -21,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -46,8 +47,8 @@ fun ListScreen(modifier: Modifier = Modifier, navController: NavController, even
     }
     var searchText by remember { mutableStateOf("") }
 
-    var callEvents:Call<List<Event>> = RetrofitFactory().getEventsService().getEvents()
-    when(evento){
+    var callEvents: Call<List<Event>> = RetrofitFactory().getEventsService().getEvents()
+    when (evento) {
         0 -> callEvents = RetrofitFactory().getEventsService().getEventsFutsal()
         1 -> callEvents = RetrofitFactory().getEventsService().getEventsCorrida()
         2 -> callEvents = RetrofitFactory().getEventsService().getEventsVolei()
@@ -63,7 +64,7 @@ fun ListScreen(modifier: Modifier = Modifier, navController: NavController, even
     callEvents.enqueue(object : Callback<List<Event>> {
         override fun onResponse(call: Call<List<Event>>, response: Response<List<Event>>) {
             eventList = response.body()!!
-            Log.i("Fiap","on failure: ${response.body()}")
+            Log.i("Fiap", "on response: ${response.body()}")
         }
 
         override fun onFailure(call: Call<List<Event>>, t: Throwable) {
@@ -77,7 +78,7 @@ fun ListScreen(modifier: Modifier = Modifier, navController: NavController, even
             .padding(32.dp)
     ) {
         Text(
-            text = "Futsal",
+            text = "Eventos Disponíveis",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Start,
@@ -99,63 +100,45 @@ fun ListScreen(modifier: Modifier = Modifier, navController: NavController, even
             shape = RoundedCornerShape(percent = 50)
         )
         Spacer(modifier = Modifier.height(15.dp))
-        Text(
-            text = "Eventos disponíveis",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Start,
-            fontFamily = Roboto,
-            color = Color(0xFF1F779E)
-        )
 
-        Spacer(modifier = Modifier.height(15.dp))
-
-        LazyColumn(){
-           items(eventList){ event ->
-               Button(
-                   onClick = { /*TODO*/ },
-                   modifier = Modifier
-                       .fillMaxWidth(),
-                   colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF15BA35)),
-               ) {
-
-                   Column(
-                       horizontalAlignment = Alignment.Start,
-                       verticalArrangement = Arrangement.Top,
-                       modifier = Modifier
-                           .fillMaxWidth()
-                           .padding(horizontal = 10.dp, vertical = 6.dp)
-                   ) {
-                       Text(
-                           text = event.name,
-                           fontSize = 11.sp,
-                           fontWeight = FontWeight.Bold,
-                           textAlign = TextAlign.Start,
-                           fontFamily = Roboto,
-                           color = Color.White
-                       )
-                       Text(
-                           text = event.date,
-                           fontSize = 11.sp,
-                           fontWeight = FontWeight.Bold,
-                           textAlign = TextAlign.Start,
-                           fontFamily = Roboto,
-                           color = Color.White
-                       )
-                   }
-
-               }
-
-               Spacer(modifier = Modifier.height(15.dp))
-           }
-
+        LazyColumn {
+            items(eventList) { event ->
+                Button(
+                    onClick = {
+                        // Navega para a ScheduleScreen passando o event.id
+                        navController.navigate("schedule/${event.id}")
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF15BA35)),
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.Top,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 10.dp, vertical = 6.dp)
+                    ) {
+                        Text(
+                            text = event.name,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Start,
+                            fontFamily = Roboto,
+                            color = Color.White
+                        )
+                        Text(
+                            text = event.date,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Start,
+                            fontFamily = Roboto,
+                            color = Color.White
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(15.dp))
+            }
         }
     }
-}
-
-// Compose Preview
-@Preview(showBackground = true)
-@Composable
-fun ListScreenPreview() {
-    ListScreen(navController = NavController(LocalContext.current))
 }
