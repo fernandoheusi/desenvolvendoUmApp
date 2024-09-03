@@ -7,10 +7,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import br.com.fiap.desenvolvendoumapp.screens.HomeScreen
+import br.com.fiap.desenvolvendoumapp.screens.ListScreen
+import br.com.fiap.desenvolvendoumapp.screens.LoginScreen
+import br.com.fiap.desenvolvendoumapp.screens.ScheduleScreen
 import br.com.fiap.desenvolvendoumapp.ui.theme.DesenvolvendoUmAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +25,44 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DesenvolvendoUmAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MeuApp()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun MeuApp() {
+    val navController = rememberNavController()
+    Scaffold(
+        modifier = Modifier.fillMaxSize()
+    ) { innerPadding ->
+        NavigationComponent(navController, Modifier.padding(innerPadding))
+    }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    DesenvolvendoUmAppTheme {
-        Greeting("Android")
+fun NavigationComponent(navController: NavHostController, modifier: Modifier = Modifier) {
+    NavHost(navController = navController, startDestination = "login", modifier = modifier) {
+        composable("login") {
+            LoginScreen(
+                onLoginClick = { navController.navigate("home") },
+            )
+        }
+        composable("home") {
+            HomeScreen(navController = navController)
+        }
+        composable("list/{categoryId}") { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getString("categoryId")?.toIntOrNull()
+            categoryId?.let {
+                ListScreen(navController = navController, evento = it)
+            }
+        }
+        composable("schedule/{eventId}") { backStackEntry ->
+            val eventId = backStackEntry.arguments?.getString("eventId")?.toIntOrNull()
+            eventId?.let {
+                ScheduleScreen(categoryId = it)
+            }
+        }
     }
 }

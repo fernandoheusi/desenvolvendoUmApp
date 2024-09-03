@@ -1,0 +1,196 @@
+{
+  "futsal": [
+    {
+      "id": "1",
+      "name": "campeonato",
+      "date": "13/12/2004"
+    },
+    {
+      "id": "2",
+      "name": "Final",
+      "date": "13/12/2004"
+    }
+  ],
+  "corrida": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    },
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    }
+  ],
+  "yoga": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    },
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    }
+  ],
+  "fit": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    },
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    }
+  ],
+  "natacao": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    },
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    }
+  ],
+  "volei": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    },
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    }
+  ],
+  "basket": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    },
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    }
+  ],
+  "ginastica": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    }
+  ],
+  "marciais": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004"
+    }
+  ],
+  "hiphop": [
+    {
+      "id": "1",
+      "name": "Futsal",
+      "date": "13/12/2004",
+      "location": "Rua Exemplo, 123, São Paulo - SP",
+      "classification": "Acima de 18 anos",
+      "categoryId": "0",
+      "description": "Venha jogar futsal com a gente!"
+    },
+    {
+      "id": "2",
+      "name": "Judo",
+      "date": "18/12/2024",
+      "location": "Rua Padre Jeova Jire, Santana - SP",
+      "classification": "Acima de 16 anos",
+      "categoryId": "8",
+      "description": "Venha treinar judo com a gente!"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Fernando"
+    },
+    {
+      "id": "2",
+      "name": "Gabriela"
+    },
+    {
+      "id": "3",
+      "name": "Kaique"
+    }
+  ],
+  "categories":[
+    {
+      "id":"0",
+      "name":"Futsal",
+      "color":"FF091F07",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/futsal.png"
+    },
+    {
+      "id":"1",
+      "name":"Corrida",
+      "color":"FFA32822",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/corrida.png"
+    },
+    {
+      "id":"2",
+      "name":"Yoga",
+      "color":"FFFF95D5",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/yoga.png"
+    },
+    {
+      "id":"3",
+      "name":"Fit Dance",
+      "color":"FFFF7CAF",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/fit.png"
+    },
+    {
+      "id":"4",
+      "name":"Natação",
+      "color":"FF45757C",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/natacao.png"
+    },
+    {
+      "id":"5",
+      "name":"Volei",
+      "color":"FFFFD542",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/volei.png"
+    },
+    {
+      "id":"6",
+      "name":"Basketball",
+      "color":"FFC36725",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/basket.png"
+    },
+    {
+      "id":"7",
+      "name":"Ginástica",
+      "color":"FF1F1F1F",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/ginastica.png"
+    },
+    {
+      "id":"8",
+      "name":"Artes Marciais",
+      "color":"FF770505",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/marciais.png"
+    },
+    {
+      "id":"9",
+      "name":"Hip Hop",
+      "color":"FF767676",
+      "pictureURL":"https://raw.githubusercontent.com/fernandoheusi/desenvolvendoUmApp/staging/app/src/main/res/drawable/hiphop.png"
+    }
+  ]
+}
