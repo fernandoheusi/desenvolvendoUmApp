@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.desenvolvendoumapp.R
 import br.com.fiap.desenvolvendoumapp.model.Category
 import br.com.fiap.desenvolvendoumapp.service.RetrofitFactory
@@ -36,7 +37,7 @@ import retrofit2.Response
 import kotlin.math.log
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
 
 
     var categoryList by remember {
@@ -77,7 +78,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(15.dp))
 
-        CategoryGrid(categories = categoryList)
+        CategoryGrid(categories = categoryList, navController = navController)
     }
 }
 
@@ -111,22 +112,22 @@ fun SearchBar(text: String, onTextChange: (String) -> Unit) {
 }
 
 @Composable
-fun CategoryGrid(categories: List<Category>) {
+fun CategoryGrid(categories: List<Category>, navController: NavController) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 128.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(categories) { category ->
-            CategoryButton(category = category)
+            CategoryButton(category = category, navController = navController)
         }
     }
 }
 
 @Composable
-fun CategoryButton(category: Category) {
+fun CategoryButton(category: Category, navController: NavController) {
     Button(
-        onClick = { /* TODO */ },
+        onClick = { navController.navigate("List") },
         modifier = Modifier
             .width(165.dp)
             .height(100.dp),
