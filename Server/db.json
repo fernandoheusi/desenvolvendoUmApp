@@ -3,7 +3,20 @@
     {
       "id": "1",
       "name": "Futsal",
-      "date": "13/12/2004"
+      "date": "13/12/2004",
+      "location": "Rua Exemplo, 123, São Paulo - SP",
+      "classification": "Acima de 18 anos",
+      "categoryId": "0",
+      "description": "Venha jogar futsal com a gente!"
+    },
+    {
+      "id": "2",
+      "name": "Judo",
+      "date": "18/12/2024",
+      "location": "Rua Padre Jeova Jire, Santana - SP",
+      "classification": "Acima de 16 anos",
+      "categoryId": "8",
+      "description": "Venha treinar judo com a gente!"
     }
   ],
   "users": [
