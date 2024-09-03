@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -37,15 +39,34 @@ import retrofit2.Callback
 import retrofit2.Response
 
 @Composable
-fun ListScreen(modifier: Modifier = Modifier, navController: NavController) {
-    var eventList = listOf<Event>()
+fun ListScreen(modifier: Modifier = Modifier, navController: NavController, evento: Int) {
+    var eventList by remember {
+        mutableStateOf(listOf<Event>())
+    }
     var searchText by remember { mutableStateOf("") }
 
+    Log.i("Fiap","$evento")
 
-    var callEvents = RetrofitFactory().getEventsService().getEvents()
+
+//    var callEvents = RetrofitFactory().getEventsService().getEvents()
+    var callEvents:Call<List<Event>> = RetrofitFactory().getEventsService().getEvents()
+    when(evento){
+        0 -> callEvents = RetrofitFactory().getEventsService().getEventsFutsal()
+        1 -> callEvents = RetrofitFactory().getEventsService().getEventsCorrida()
+        2 -> callEvents = RetrofitFactory().getEventsService().getEventsVolei()
+        3 -> callEvents = RetrofitFactory().getEventsService().getEventsBasket()
+        4 -> callEvents = RetrofitFactory().getEventsService().getEventsFit()
+        5 -> callEvents = RetrofitFactory().getEventsService().getEventsMarciais()
+        6 -> callEvents = RetrofitFactory().getEventsService().getEventsYoga()
+        7 -> callEvents = RetrofitFactory().getEventsService().getEventsNatacao()
+        8 -> callEvents = RetrofitFactory().getEventsService().getEventsGinastica()
+        9 -> callEvents = RetrofitFactory().getEventsService().getEventsHiphop()
+    }
+
     callEvents.enqueue(object : Callback<List<Event>> {
         override fun onResponse(call: Call<List<Event>>, response: Response<List<Event>>) {
             eventList = response.body()!!
+            Log.i("Fiap","on failure: ${response.body()}")
         }
 
         override fun onFailure(call: Call<List<Event>>, t: Throwable) {
@@ -93,38 +114,44 @@ fun ListScreen(modifier: Modifier = Modifier, navController: NavController) {
 
         Spacer(modifier = Modifier.height(15.dp))
 
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier
-                .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF15BA35)),
-        ) {
+        LazyColumn(){
+           items(eventList){ event ->
+               Button(
+                   onClick = { /*TODO*/ },
+                   modifier = Modifier
+                       .fillMaxWidth(),
+                   colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF15BA35)),
+               ) {
 
-            Column(
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 10.dp, vertical = 6.dp)
-            ) {
-                Text(
-                    text = "Futsal na quadra",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    fontFamily = Roboto,
-                    color = Color.White
-                )
-                Text(
-                    text = "Quarta - 17/08 as 09:30",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    fontFamily = Roboto,
-                    color = Color.White
-                )
-            }
+                   Column(
+                       horizontalAlignment = Alignment.Start,
+                       verticalArrangement = Arrangement.Top,
+                       modifier = Modifier
+                           .fillMaxWidth()
+                           .padding(horizontal = 10.dp, vertical = 6.dp)
+                   ) {
+                       Text(
+                           text = event.name,
+                           fontSize = 11.sp,
+                           fontWeight = FontWeight.Bold,
+                           textAlign = TextAlign.Start,
+                           fontFamily = Roboto,
+                           color = Color.White
+                       )
+                       Text(
+                           text = event.date,
+                           fontSize = 11.sp,
+                           fontWeight = FontWeight.Bold,
+                           textAlign = TextAlign.Start,
+                           fontFamily = Roboto,
+                           color = Color.White
+                       )
+                   }
 
+               }
+
+               Spacer(modifier = Modifier.height(15.dp))
+           }
         }
     }
 }

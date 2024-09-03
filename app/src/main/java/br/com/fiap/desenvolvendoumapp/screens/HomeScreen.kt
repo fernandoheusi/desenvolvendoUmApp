@@ -127,7 +127,10 @@ fun CategoryGrid(categories: List<Category>, navController: NavController) {
 @Composable
 fun CategoryButton(category: Category, navController: NavController) {
     Button(
-        onClick = { navController.navigate("List") },
+        onClick = {
+            Log.i("Fiap","id: ${category.id}")
+            navController.navigate("list/${category.id}")
+        },
         modifier = Modifier
             .width(165.dp)
             .height(100.dp),
