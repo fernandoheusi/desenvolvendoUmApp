@@ -15,4 +15,7 @@ class RetrofitFactory {
     fun getCategoriesService(): CategoryService {
         return retrofitFactory.create(CategoryService::class.java)
     }
+    fun getEventsService(): EventService {
+        return retrofitFactory.create(EventService::class.java)
+    }
 }

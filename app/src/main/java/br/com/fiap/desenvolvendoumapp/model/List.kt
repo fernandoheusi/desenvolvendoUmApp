@@ -1,8 +1,7 @@
 package br.com.fiap.desenvolvendoumapp.model
 
-data class Category(
+data class Event(
     val id: Int,
     val name: String,
-    val color: String,
-    val pictureURL: String,
+    val date: String,
 )

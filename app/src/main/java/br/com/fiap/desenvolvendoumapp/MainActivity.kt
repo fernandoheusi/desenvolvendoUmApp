@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.desenvolvendoumapp.screens.HomeScreen
+import br.com.fiap.desenvolvendoumapp.screens.ListScreen
 import br.com.fiap.desenvolvendoumapp.screens.LoginScreen
 import br.com.fiap.desenvolvendoumapp.screens.ScheduleScreen
 import br.com.fiap.desenvolvendoumapp.ui.theme.DesenvolvendoUmAppTheme
@@ -56,6 +58,9 @@ fun NavigationComponent(navController: NavHostController, modifier: Modifier = M
         }
         composable("home") {
             HomeScreen(navController = navController)
+        }
+        composable("list") {
+            ListScreen(navController = navController)
 
         }
         composable("schedule/{categoryId}") { backStackEntry ->

@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import br.com.fiap.desenvolvendoumapp.R
 import br.com.fiap.desenvolvendoumapp.model.Category
 import br.com.fiap.desenvolvendoumapp.service.RetrofitFactory
@@ -34,9 +34,11 @@ import coil.compose.AsyncImage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) {
+fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
+
 
     var categoryList by remember {
         mutableStateOf(listOf<Category>())
@@ -110,7 +112,7 @@ fun SearchBar(text: String, onTextChange: (String) -> Unit) {
 }
 
 @Composable
-fun CategoryGrid(categories: List<Category>, navController: NavHostController) {
+fun CategoryGrid(categories: List<Category>, navController: NavController) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 128.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
@@ -123,13 +125,9 @@ fun CategoryGrid(categories: List<Category>, navController: NavHostController) {
 }
 
 @Composable
-fun CategoryButton(category: Category, navController: NavHostController) {
+fun CategoryButton(category: Category, navController: NavController) {
     Button(
-        onClick = {
-            /*if (category.name == "Futsal") {
-                navController.navigate("schedule/${category.id}")
-            } */
-        },
+        onClick = { navController.navigate("List") },
         modifier = Modifier
             .width(165.dp)
             .height(100.dp),
