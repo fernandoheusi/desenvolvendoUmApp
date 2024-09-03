@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.desenvolvendoumapp.screens.HomeScreen
 import br.com.fiap.desenvolvendoumapp.screens.LoginScreen
+import br.com.fiap.desenvolvendoumapp.screens.ScheduleScreen
 import br.com.fiap.desenvolvendoumapp.ui.theme.DesenvolvendoUmAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -54,7 +55,14 @@ fun NavigationComponent(navController: NavHostController, modifier: Modifier = M
             )
         }
         composable("home") {
-            HomeScreen()
+            HomeScreen(navController = navController)
+
+        }
+        composable("schedule/{categoryId}") { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getString("categoryId")?.toIntOrNull()
+            categoryId?.let {
+                ScheduleScreen(it)
+            }
         }
     }
 }
