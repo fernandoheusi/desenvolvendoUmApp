@@ -43,7 +43,7 @@ fun MeuApp() {
 
 @Composable
 fun NavigationComponent(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController = navController, startDestination = "login", modifier = modifier) {
+    NavHost(navController = navController, startDestination = "home", modifier = modifier) {
         composable("login") {
             LoginScreen(
                 onLoginClick = { navController.navigate("home") },
@@ -52,8 +52,11 @@ fun NavigationComponent(navController: NavHostController, modifier: Modifier = M
         composable("home") {
             HomeScreen(navController = navController)
         }
-        composable("list") {
-            ListScreen(navController = navController)
+        composable("list/{evento}") { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getString("evento")?.toIntOrNull()
+            categoryId?.let {
+                ListScreen(navController = navController, evento = it)
+            }
         }
         composable("schedule/{categoryId}") { backStackEntry ->
             val categoryId = backStackEntry.arguments?.getString("categoryId")?.toIntOrNull()
